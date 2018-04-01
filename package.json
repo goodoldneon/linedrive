@@ -1,0 +1,26 @@
+{
+	"name": "linedrive",
+	"version": "0.1.0",
+	"description": "ORM for the Lahman baseball database",
+	"main": "index.js",
+	"author": "Aaron Harper",
+	"license": "MIT",
+	"scripts": {
+		"dev": "concurrently --kill-others \"npm run dev:serve\" \"npm run dev:prettier\"",
+		"dev:serve": "nodemon index.js NODE_ENV=development",
+		"dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}"
+	},
+	"devDependencies": {
+		"babel-eslint": "^8.2.2",
+		"concurrently": "^3.5.1",
+		"eslint": "^4.19.1",
+		"npm-run-all": "^4.1.2",
+		"onchange": "^3.3.0",
+		"prettier": "^1.11.1"
+	},
+	"dependencies": {
+		"dotenv": "^5.0.1",
+		"mysql2": "^1.5.3",
+		"sequelize": "^4.37.5"
+	}
+}
