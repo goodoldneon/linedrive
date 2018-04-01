@@ -9,9 +9,6 @@ const parseConfig = config => {
     dialect: 'mysql',
     operatorsAliases: false,
     logging: false,
-    query: {
-      raw: true,
-    },
   }
 
   return Object.assign({}, configDefault, config)

@@ -6,11 +6,22 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         primaryKey: true,
       },
-      nameFirst: {
-        type: DataTypes.STRING,
+      birthYear: DataTypes.SMALLINT,
+      birthMonth: DataTypes.TINYINT,
+      birthDay: DataTypes.TINYINT,
+      nameFirst: DataTypes.STRING,
+      nameLast: DataTypes.STRING,
+      nameFull: {
+        type: new DataTypes.VIRTUAL(DataTypes.STRING, ['nameFirst', 'nameLast']),
+        get: function() {
+          return `${this.nameFirst} ${this.nameLast}`
+        },
       },
-      nameLast: {
-        type: DataTypes.STRING,
+      birthDate: {
+        type: new DataTypes.VIRTUAL(DataTypes.STRING, ['birthYear', 'birthMonth', 'birthDay']),
+        get: function() {
+          return new Date(this.birthYear, this.birthMonth, this.birthDay)
+        },
       },
     },
     {
