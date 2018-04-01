@@ -1,13 +1,24 @@
-const db = require('./models')
+const model = require('./model')
 
-const main = async () => {
-  const foo = await db.player.findAll({
-    where: {
-      nameLast: 'Bonds',
+const parseConfig = config => {
+  const configDefault = {
+    database: 'lahman2016',
+    username: 'root',
+    password: 'steel87',
+    host: 'localhost',
+    dialect: 'mysql',
+    operatorsAliases: false,
+    logging: false,
+    query: {
+      raw: true,
     },
-  })
+  }
 
-  console.log(foo[0].playerID)
+  return Object.assign({}, configDefault, config)
 }
 
-main()
+module.exports = function(config) {
+  config = parseConfig(config)
+
+  return model(config)
+}
