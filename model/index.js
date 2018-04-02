@@ -3,6 +3,11 @@ const path = require('path')
 const Sequelize = require('sequelize')
 const basename = path.basename(__filename)
 
+const associateModels = db => {
+  db.player.hasMany(db.batting, { foreignKey: 'playerID' })
+  db.batting.hasOne(db.player, { foreignKey: 'playerID' })
+}
+
 module.exports = function(config) {
   const db = {}
   const sequelize = new Sequelize(config.database, config.username, config.password, config)
@@ -22,6 +27,8 @@ module.exports = function(config) {
       db[modelName].associate(db)
     }
   })
+
+  associateModels(db)
 
   db.sequelize = sequelize
   db.Sequelize = Sequelize
